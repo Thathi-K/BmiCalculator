@@ -15,19 +15,23 @@ public class BmiCalculator{
 		
 		char repeat=0;
 		String name,surname;
+		// Get user input for name and surname
 		System.out.println("Enter your name and surname");
 		System.out.print("Name: ");
 		name=scanner.next();
 		System.out.print("Surname:");
 		surname=scanner.next();
 		int reMessage=0;
+		// Repeated BMI calculation loop
 		do{
 			
 			int unitChoice=getUnitChoice(scanner);
+			// Get weight and height with validation based on unit choice
 			double weight=(unitChoice ==1)?getValidInput(scanner,"Enter your weight in kilograms: ",10,100)
 					:getValidInput(scanner,"Enter your weight in pounds: ",22,1300);
 			double height=(unitChoice ==1)?getValidInput(scanner,"Enter your height in meters: ",0.5,2.5)
 					:getValidInput(scanner,"Enter your height in inches",20,100);
+			// Calculate and display BMI result
 			double bmi=calculateBMI(unitChoice,weight,height);
 			if(reMessage==0){
 				System.out.println("Hi "+name+" "+surname+" your BMI is "+bmi+" and you are "+displayCategory(bmi)+"\nWould you like to recalculate your BMI");}
@@ -41,7 +45,7 @@ public class BmiCalculator{
 			
 		}while(repeat=='Y'||repeat=='y');
 	}
-	
+	// Prompts the user to choose between metric or imperial units
 	public static int getUnitChoice(Scanner scanner){
 
 		int choice;
@@ -68,7 +72,7 @@ public class BmiCalculator{
 		}
 	return choice;
 	}
-
+	// Prompts and validates numeric input within a given range
 	public static double getValidInput(Scanner scanner,String prompt,double min,double max){
 		double value;
 		
@@ -88,7 +92,7 @@ public class BmiCalculator{
 		}
 	return value;
 	}
-	
+	// Calculates BMI based on unit system and input values
 	public static double calculateBMI(int unitChoice,double weight,double height){
 	
 		double totalBMI;
@@ -104,7 +108,7 @@ public class BmiCalculator{
 	return totalBMI;
 
 	}
-	
+	// Determines the BMI category based on the calculated BMI value
 	public static String displayCategory(double bmi){
 
 		if(bmi<18.5){
@@ -124,7 +128,7 @@ public class BmiCalculator{
 		}else {return "Morbidly Obese";}
 		
 	}
-
+	// Asks the user whether they want to recalculate BMI
 	public static char askToRepeat(Scanner scanner){
 	 char repeat;
 		while(true){
